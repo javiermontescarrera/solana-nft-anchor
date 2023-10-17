@@ -4,26 +4,25 @@ use anchor_spl::{
     metadata::{
         create_master_edition_v3, create_metadata_accounts_v3, CreateMasterEditionV3,
         CreateMetadataAccountsV3, Metadata, 
-    }, 
+    }, // new
     token::{mint_to, Mint, MintTo, Token, TokenAccount},
 };
 use mpl_token_metadata::{
-    pda::{find_master_edition_account, find_metadata_account},
-    state::DataV2,
+    pda::{find_master_edition_account, find_metadata_account}, 
+    state::DataV2 // new
 };
 
-declare_id!("9TEtkW972r8AVyRmQzgyMz8GpG7WJxJ2ZUVZnjFNJgWM"); // shouldn't be similar to mine
+declare_id!("Ckszjv83Xxff3xRcUAzpFd8CTUkL5QXipyTo29U3LnDN");
 
 #[program]
 pub mod solana_nft_anchor {
-
     use super::*;
 
     pub fn init_nft(
         ctx: Context<InitNFT>,
-        name: String,  
-        symbol: String, 
-        uri: String,
+        name: String,   // new
+        symbol: String, // new
+        uri: String,    // new
     ) -> Result<()> {
         // create mint account
         let cpi_context = CpiContext::new(
@@ -110,7 +109,7 @@ pub struct InitNFT<'info> {
         mut,
         address=find_metadata_account(&mint.key()).0,
     )]
-    pub metadata_account: AccountInfo<'info>, 
+    pub metadata_account: AccountInfo<'info>,
     /// CHECK: address
     #[account(
         mut,
